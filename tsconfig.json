@@ -1,3 +1,12 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2018",
+    "typeRoots": ["./src", "./node_modules/@types"]
+  },
+  "include": ["./src/**/*"]
 }
