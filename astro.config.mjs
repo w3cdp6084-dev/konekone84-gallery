@@ -1,3 +1,7 @@
+import react from '@astrojs/react';
+
 export default {
-  renderers: ['@astrojs/renderer-react'],
+  integrations: [
+    react(),
+  ],
 };
