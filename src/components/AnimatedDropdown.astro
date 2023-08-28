@@ -1,55 +1,88 @@
+---
+// Astro component for the menu
+---
 
-<header class="header">
-  <button class="menu-btn" id="menu-btn">Menu</button>
-</header>
+<aside class="menu" id="menu">
+  <nav class="menu-items">
+    <a href="#" class="menu-item">Home</a>
+    <a href="#" class="menu-item">About</a>
+    <a href="#" class="menu-item">Services</a>
+    <a href="#" class="menu-item">Contact</a>
+  </nav>
+</aside>
 
-<nav class="menu" id="menu">
-  <a href="#" class="menu-item">Home</a>
-  <a href="#" class="menu-item">About</a>
-  <a href="#" class="menu-item">Services</a>
-  <a href="#" class="menu-item">Contact</a>
-</nav>
+<button class="menu-btn" id="menu-btn">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</button>
 
 <style>
   .menu {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -200px;
+    width: 250px;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #333;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
-    z-index: 2;
+    padding: 1rem;
+    box-sizing: border-box;
+    transition: left 0.3s ease-in-out;
+    z-index: 10;
   }
 
-  .menu.active {
-    opacity: 1;
-    pointer-events: auto;
+  .menu.open {
+    left: 0;
+  }
+
+  .menu-items {
+    display: none;
+    width: 100%;
+  }
+
+  .menu.open .menu-items {
+    display: block;
   }
 
   .menu-item {
     color: white;
-    font-size: 2rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
     text-decoration: none;
   }
+
+  .menu-item:hover {
+    color: #ccc;
+  }
+
+  .menu-btn {
+    position: fixed;
+    top: 50%;
+    left: calc(50% - 125px);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Add transition for the fade-out animation */
+  }
+
+  .menu-btn.hidden {
+    opacity: 0; /* Add hidden class for the fade-out animation */
+  }
 </style>
 
-<script type="module">
-  window.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu');
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
 
-    if (menuBtn !== null && menu !== null) {
-      menuBtn.addEventListener('click', () => {
-        menu.classList.toggle('active');
-      });
-    }
+  menuBtn.addEventListener('click', () => {
+    menu.classList.toggle('open');
+    menuBtn.classList.toggle('hidden'); // Toggle the hidden class for the fade-out animation
   });
 </script>
